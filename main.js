@@ -1768,8 +1768,52 @@ function handleDeleteCourse (id) {
   });
 }
 
-function handleFixCourse (){
+function handleFixCourse (id, name, description){
+  let nameCourse = document.getElementById('name_input')
+  let desCourse= document.getElementById('description_input')
+  nameCourse.value = name
+  desCourse.value = description
+  let idCourse = document.getElementById('123')
+  idCourse.value = id;
+}
 
+function editBtn (){
+  let idName = document.getElementById('123').value
+  let desName= document.getElementById('description_input').value
+  let nameName =document.getElementById('name_input').value
+  
+  let data = {
+    id: idName,
+    name: nameName,
+    description: desName
+  }
+  var options = {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'},
+    body: JSON.stringify(data)
+  }
+  fetch (coursesApi + '/' + idName, options)
+  .then (function (response){
+    response.json();
+  })
+  .then (function () {
+    // getCourses (renderCourses);
+    var courseItem = document.querySelector ('.course-item-' + idName)
+    courseItem.innerHTML = `
+    <li class="course-item-${idName}">
+      <h4> ${nameName}</h4>
+      <p> ${desName}</p>
+      <button onclick = "handleDeleteCourse(${idName})"> Xóa </button>
+      <button onclick = "handleFixCourse(${idName}, '${nameName}', '${desName}')"> Sửa </button>
+    </li> `;
+
+  });
+  // .then (callback);
+}
+
+function resetBtn (){
+  getCourses (renderCourses);
 }
 
 function renderCourses (courses){
@@ -1779,7 +1823,8 @@ function renderCourses (courses){
     <li class="course-item-${course.id}">
       <h4> ${course.name}</h4>
       <p> ${course.description}</p>
-      <button onclick = "handleDeleteCourse (${course.id})"> Xóa </button>
+      <button onclick = "handleDeleteCourse(${course.id})"> Xóa </button>
+      <button onclick = "handleFixCourse(${course.id}, '${course.name}', '${course.description}')"> Sửa </button>
     </li> `;
   })
   listCourses.innerHTML = htmls.join ('');
@@ -1799,6 +1844,11 @@ function handleCreateForm (){
     });
   }
 }
+
+
+
+
+
 
 //ECMAScript 6 - ES6
 /**Var / let,Const: Scope, Hosting
@@ -1828,43 +1878,202 @@ function handleCreateForm (){
 // Line 3`
 // console.log (lines)
 
+//Arrow function
+// const logger=  log => {
+//   console.log (log)
+// }
+// logger ('message...');
+// const sum = (a,b) => a + b
+// console.log (sum(2,2));
+// const sum =  (a,b) => ({a:a, b:b})
+// console.log (sum(2,2));
+// const obj = {
+//   name: 'Javascript',
+//   price: 100000000000,
+//   getName: function (){
+//     return this.price;
+//   }
+// }
+// console.log (obj.getName());
 
+//Classes
+// function Course (name, price)
+// {
+//   this.name =name,
+//   this.price = price
+// }
+// class Course {
+//   constructor (name, price)
+//   {
+//     this.name = name,
+//     this.price = price
+//   }
+//   getName () {
+//     return this.name;
+//   }
+//   getPrice (){
+//     return this.price;
+//   }
+// }
+// const phpCourse = new Course ('PHP', 1099999)
+// const javaCourse = new Course ('Java', 399999)
 
+// console.log (phpCourse);
+// console.log (javaCourse);
 
+//Default parameter values
+// function logger (log = 'Gia tri sai'){
+//    console.log (log)
+// }
+// logger ()
+// function logger (log, type='log' )
+// {
+//  console[type](log)
+// }
+// logger ('jwshgbfb');
 
+//Enhanced object literals
+/**Định nghĩa key: value cho object
+ * Định nghĩa method cho object
+ * Định nghĩa key cho object dưới dạng biến
+ */
+// var name = 'Javscript';
+// var price = 1000;
 
+// var course = {
+//   name,
+//   price,
+//   getName(){
+//     return name;
+//   }
+// }
 
+// console.log (course);
+// var fieldName = 'name'
+// var fieldPrice = 'price'
+// const course= {
+//  [fieldName] : 'Java',
+// [fieldPrice]: 10000
+// }
+// console.log (course);
 
+// Destructuring
+// var array = ['Javascript', 'PHP', 'Ruby']
+// var a = array[0];
+// var b = array[1];
+// var c = array[2];
+// var [a,b,c] = array;
+// console.log (a,b,c);
+// var [a,b, ...rest]= array;
+// console.log (a,b);
+// console.log (rest);
+// var course ={
+//   name:'Javascript',
+//   price :10000,
+//   children: {
+//     name: 'PHP'
+//   }
+// }
+// var {name, price} = course
+// console.log (name, price);
+// var {name, ...rest} =course
+// console.log(name)
+// console.log (rest);
+// var {name: parentsName, children: {name}} = course
+// console.log (parentsName, name);
+// var {name, description = 'kkk'} = course;
+// console.log (name, description);
 
+//Rest Parameters: Cú pháp giống Spread nhưng tác dụng ngược lại, sử dụng
+//kết hợp với destructuring, sử dụng khi định nghĩa ra tham số
 
+//Spread: (...) có thể chuyển đổi một mảng thành một chuỗi các tham số 
+//phân tách bằng dấu phẩy
+// function logger (a,b,...params){
+//   console.log (params)
+// }
+// logger (1,2,3,4,5,6)
+// function logger ({name, price, ...rest}){
+//   console.log (name, price)
+//   console.log (rest);
+// }
+// logger ({
+//   name: 'Java',
+//   price: 10000,
+//   description:'kkk'
+// })
+// var array1 = ['Javascript', 'PHP', 'Ruby'];
+// var array2 = ['ReactJS', 'Dart']
+// var array3 = [...array2, ...array1]
+// // console.log (array1.concat(array2.concat((array3))));
+// console.log (array3);
+// var obj1= {
+//   name: 'Java'
+// }
+// var obj2 = {
+//   price: 1000
+// }
+// var obj3 = {
+//   description: 'kkk'
+// }
+// var obj4 ={
+//   ...obj1,
+//   ...obj2,
+//   ...obj3
+// }
+// console.log (obj4);
+// var array = ['Javascript', 'PHP', 'Ruby', 'ReactJS']
+// // function logger (a,b,c){
+// //   console.log (a,b,c);
+// // }
+// function logger (...rest)
+// {
+//   for (var i = 0; i < rest.length; i++){
+//     console.log (rest[i]);
+//   }
+// }
+// logger (...array);
 
+//Tagged template literals
+// function highlight(...rest) {
+//   console.log(rest);
+// }
+// function highlight([first, ...strings], ...values) {
+//   // console.log(first);
+//   // console.log(strings);
+//   // console.log(values);
+//   return values.reduce((acc,curr) => [...acc, `<span>${curr}</span>`, strings.shift],
+//   [first])
+//   .join('')
+// }
 
+// var brand = 'f8';
+// var course = 'Javascript';
+// const htmls = highlight`Học lập trình ${course} ở ${brand}`;
+// console.log (htmls)
 
+//Modules
+// import logger from './logger.js';
+// console.log(logger);
+// logger ('Text warning...', 'warn');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//Optional chaining
+// const obj = {
+//   name: 'Khoi',
+//   age: {
+//     name: 'Dinh',
+//     midName: {
+//       name: 'Nguyen'
+//     }
+//   }
+// }
+// if (obj?.age?.midName?.name){
+// console.log (obj.age.midName.name);}
+// const obj = {
+// test (value){
+//   console.log (value);
+// }}
+// obj.test?.(1234);
 
 
 

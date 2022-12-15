@@ -79,18 +79,26 @@
     <div>   
         <div>
             <label>Name</label>
-            <input type="text" name="name">
+            <input id="name_input" type="text" name="name">
         </div>
         <div>
             <label>Description</label>
-            <input type="text" name="description">
+            <input id ="description_input" type="text" name="description">
         </div>
         <div>
             <button id ="create">Create</button>
         </div>
+        <div>
+            <button id ="fix" onclick="editBtn()">Lưu</button>
+        </div>
+        <div>
+            <input disabled id="123" type="text">
+        </div>
+        <div>
+            <button id="reset" onclick="resetBtn()">Reset</button>
+        </div>
     </div>
 
 </body>
-<script src="./main.js"></script>
+<script type="module" src="./main.js"></script>
 </html>  
-
