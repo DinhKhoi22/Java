@@ -2052,10 +2052,10 @@ function handleCreateForm (){
 // const htmls = highlight`Học lập trình ${course} ở ${brand}`;
 // console.log (htmls)
 
-//Modules
-// import logger from './logger.js';
-// console.log(logger);
-// logger ('Text warning...', 'warn');
+Modules
+import logger from './logger.js';
+console.log(logger);
+logger ('Text warning...', 'warn');
 
 //Optional chaining
 // const obj = {
