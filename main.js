@@ -1713,7 +1713,7 @@ console.log(numbers.mySome(function (number, index, array) {
 
 
 
-// var listCourses = document.querySelector ('ul');
+var listCourses = document.querySelector ('ul');
 var coursesApi = 'http://localhost:3000/courses';
 function start()
 {
@@ -1776,6 +1776,15 @@ function handleFixCourse (id, name, description){
   let idCourse = document.getElementById('123')
   idCourse.value = id;
 }
+function resetBtn (){
+  let nameCourse = document.getElementById('name_input')
+  let desCourse= document.getElementById('description_input')
+  let idCourse = document.getElementById('123')
+  console.log(nameCourse)
+  nameCourse.value = '';
+  desCourse.value = '';
+  idCourse.value = '';
+}
 
 function editBtn (){
   let idName = document.getElementById('123').value
@@ -1810,10 +1819,6 @@ function editBtn (){
 
   });
   // .then (callback);
-}
-
-function resetBtn (){
-  getCourses (renderCourses);
 }
 
 function renderCourses (courses){
@@ -2052,10 +2057,10 @@ function handleCreateForm (){
 // const htmls = highlight`Học lập trình ${course} ở ${brand}`;
 // console.log (htmls)
 
-Modules
-import logger from './logger.js';
-console.log(logger);
-logger ('Text warning...', 'warn');
+// Modules
+// import logger from './logger.js';
+// console.log(logger);
+// logger ('Text warning...', 'warn');
 
 //Optional chaining
 // const obj = {
@@ -2075,8 +2080,40 @@ logger ('Text warning...', 'warn');
 // }}
 // obj.test?.(1234);
 
+// var postApi = 'https://jsonplaceholder.typicode.com/posts'
 
+// fetch(postApi)
+//   .then (function(response){
+//     return response.json();
+//   })
+//   .then (function(posts){
+//     const htmls = posts.map(function(post){
+//       return `<li>
+//         <h2>${post.title}</h2>
+//         <p>${post.body}</p>
+//       </li>`
+//     })
+//     const html = htmls.join('')
+//    document.getElementById('post-block').innerHTML = html;
+//   })
 
+// const commentsApi = 'https://jsonplaceholder.typicode.com/comments'
+
+// fetch(commentsApi)
+// .then(function (response){
+//   return response.json();
+//   //JSON.parse: JSON => Javascript types
+// })
+// .then (function (comments){
+//   const htmls = comments.map(function(comment){
+//     return `<li>
+//       <h2>${comment.name}</h2>
+//       <p>${comment.body}</p>
+//     </li>`
+//   })
+//   const html = htmls.join('')
+//   document.getElementById('comments').innerHTML= html;
+// })
 
 
 
